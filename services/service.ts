@@ -1,6 +1,6 @@
 import { placeData, productUrl } from "../repositories/repository.ts";
 
-const getProductData = async (url: string) => {
+const getAllProductData = async (url: string) => {
   const response = await fetch(url);
   const result = (await response.text())
     .replaceAll(/\n|\t/g, "")
@@ -26,8 +26,6 @@ const getProductData = async (url: string) => {
     });
 };
 
-// const getFlattedProductData = (productData)=>
-
 const getPlace = async (latitude: number, longitude: number) => {
   const appid = "dj00aiZpPTdFczJycG5Yand0aCZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-";
   const result = await fetch(
@@ -49,15 +47,15 @@ export const get711Data = async (
   // 地方
   const region = getRegion(place);
   // 全部
-  const allData =
-    (await Promise.all(productUrl.map((x) => getProductData(x.url))))
+  const allProducts =
+    (await Promise.all(productUrl.map((x) => getAllProductData(x.url))))
       .flat();
   // 都道府県
-  const placeProduct = allData.filter((x) => x.place.includes(place));
+  const placeProducts = allProducts.filter((x) => x.place.includes(place));
   // 地方
-  const regionProduct = allData.filter((x) => x.place.includes(region!));
-
-  return [...placeProduct, ...regionProduct].find((x, i, arr) =>
-    i === ~~(Math.random() * [...placeProduct, ...regionProduct].length)
-  );
+  const regionProducts = allProducts.filter((x) => x.place.includes(region!));
+  // 実行地域で購入できるやつ
+  const canGetProducts = [...new Set([...placeProducts, ...regionProducts])];
+  const rand = ~~(Math.random() * canGetProducts.length);
+  return canGetProducts[rand];
 };
