@@ -1,4 +1,4 @@
-import { productUrl } from "../repositories/repository.ts";
+import { placeData, productUrl } from "../repositories/repository.ts";
 
 const getProductData = async (url: string) => {
   const response = await fetch(url);
@@ -36,15 +36,28 @@ const getPlace = async (latitude: number, longitude: number) => {
   const json = await result.json();
   return json.Feature[0].Property.AddressElement[0].Name;
 };
+
+const getRegion = (prefecture: string) =>
+  placeData.region.find((x) => x.pref.find((x) => x.ja === prefecture))?.ja;
+
 export const get711Data = async (
   latitude: number = 35.68381981,
   longitude: number = 139.77456498,
 ) => {
-  console.log(latitude, longitude);
+  // 都道府県
   const place = await getPlace(latitude, longitude);
-  console.log(place);
+  // 地方
+  const region = getRegion(place);
+  // 全部
   const allData =
     (await Promise.all(productUrl.map((x) => getProductData(x.url))))
       .flat();
-  return allData.filter((x) => x.place.includes(place));
+  // 都道府県
+  const placeProduct = allData.filter((x) => x.place.includes(place));
+  // 地方
+  const regionProduct = allData.filter((x) => x.place.includes(region!));
+
+  return [...placeProduct, ...regionProduct].find((x, i, arr) =>
+    i === ~~(Math.random() * [...placeProduct, ...regionProduct].length)
+  );
 };
