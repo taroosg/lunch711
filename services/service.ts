@@ -1,4 +1,5 @@
 import { placeData, productUrl } from "../repositories/repository.ts";
+import "https://deno.land/x/dotenv/load.ts";
 
 const getAllProductData = async (url: string) => {
   const response = await fetch(url);
@@ -27,7 +28,7 @@ const getAllProductData = async (url: string) => {
 };
 
 const getPlace = async (latitude: number, longitude: number) => {
-  const appid = "dj00aiZpPTdFczJycG5Yand0aCZzPWNvbnN1bWVyc2VjcmV0Jng9Nzk-";
+  const appid = Deno.env.get("YAHOO_APP_ID");
   const result = await fetch(
     `https://map.yahooapis.jp/geoapi/V1/reverseGeoCoder?output=json&lat=${latitude}&lon=${longitude}&appid=${appid}`,
   );
