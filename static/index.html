@@ -25,7 +25,6 @@
 
       try {
         const position = await getPosition();
-        console.log(position);
         const getData = async (position) => {
           const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
           return await response.json();
@@ -45,9 +44,7 @@
     document.getElementById('submit').addEventListener('click', async () => {
       lunch['html'] = '<p>loading...</p>';
       document.getElementById('result').innerHTML = lunch['html'];
-      const menu = await getLunchMenu();
-      lunch['html'] = createHtmlElement(menu);
-      console.log(lunch);
+      lunch['html'] = createHtmlElement(await getLunchMenu());
       document.getElementById('result').innerHTML = lunch['html'];
     });
 
