@@ -13,13 +13,24 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
-    console.log(location.href);
 
     (async () => {
-      const getData = async () => {
-        return await axios.get(`${location.href}json`);
+
+      const getPosition = () => new Promise((resolve, reject) =>
+        navigator.geolocation.getCurrentPosition(resolve, reject)
+      );
+
+      try {
+        const position = await getPosition();
+        console.log(position);
+        const getData = async (position) => {
+          return await axios.get(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
+        }
+        console.log(await getData(position));
+      } catch (err) {
+        console.error(err.message);
       }
-      console.log(await getData());
+
     })()
 
   </script>
