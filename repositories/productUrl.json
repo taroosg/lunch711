@@ -1,0 +1,162 @@
+[
+  {
+    "category": "弁当1",
+    "url": "https://www.sej.co.jp/products/a/cat/010020010000000/1/l100/"
+  },
+  {
+    "category": "弁当2",
+    "url": "https://www.sej.co.jp/products/a/cat/010020010000000/2/l100/"
+  },
+  {
+    "category": "チルド弁当",
+    "url": "https://www.sej.co.jp/products/a/cat/010020020000000/1/l100/"
+  },
+  {
+    "category": "手巻きおにぎり",
+    "url": "https://www.sej.co.jp/products/a/cat/010010010000000/1/l100/"
+  },
+  {
+    "category": "直巻おむすび",
+    "url": "https://www.sej.co.jp/products/a/cat/010010020000000/1/l100/"
+  },
+  {
+    "category": "その他のおむすび1",
+    "url": "https://www.sej.co.jp/products/a/cat/010010030000000/1/l100/"
+  },
+  {
+    "category": "その他のおむすび2",
+    "url": "https://www.sej.co.jp/products/a/cat/010010030000000/2/l100/"
+  },
+  {
+    "category": "手巻き寿司",
+    "url": "https://www.sej.co.jp/products/a/cat/010030010000000/1/l100/"
+  },
+  {
+    "category": "いなり寿司",
+    "url": "https://www.sej.co.jp/products/a/cat/010030020000000/1/l100/"
+  },
+  {
+    "category": "その他の寿司",
+    "url": "https://www.sej.co.jp/products/a/cat/010030030000000/1/l100/"
+  },
+  {
+    "category": "サンドイッチロールパン1",
+    "url": "https://www.sej.co.jp/products/a/sandwich/1/l100/"
+  },
+  {
+    "category": "サンドイッチロールパン2",
+    "url": "https://www.sej.co.jp/products/a/sandwich/2/l100/"
+  },
+  {
+    "category": "食パン",
+    "url": "https://www.sej.co.jp/products/a/cat/050010010000000/1/l100/"
+  },
+  {
+    "category": "食事パン",
+    "url": "https://www.sej.co.jp/products/a/cat/050010020000000/1/l100/"
+  },
+  {
+    "category": "菓子パン",
+    "url": "https://www.sej.co.jp/products/a/cat/050020010000000/1/l100/"
+  },
+  {
+    "category": "惣菜パン",
+    "url": "https://www.sej.co.jp/products/a/cat/050020020000000/1/l100/"
+  },
+  {
+    "category": "ドーナツ",
+    "url": "https://www.sej.co.jp/products/a/donut/1/l100/"
+  },
+  {
+    "category": "そば",
+    "url": "https://www.sej.co.jp/products/a/cat/030010010000000/1/l100/"
+  },
+  {
+    "category": "うどん",
+    "url": "https://www.sej.co.jp/products/a/cat/030010020000000/1/l100/"
+  },
+  {
+    "category": "中華麺",
+    "url": "https://www.sej.co.jp/products/a/cat/030010030000000/1/l100/"
+  },
+  {
+    "category": "焼きそば焼きうどん",
+    "url": "https://www.sej.co.jp/products/a/cat/030010040000000/1/l100/"
+  },
+  {
+    "category": "スパゲティパスタ",
+    "url": "https://www.sej.co.jp/products/a/pasta/1/l100/"
+  },
+  {
+    "category": "グラタンドリア",
+    "url": "https://www.sej.co.jp/products/a/gratin/1/l100/"
+  },
+  {
+    "category": "惣菜1",
+    "url": "https://www.sej.co.jp/products/a/dailydish/1/l100/"
+  },
+  {
+    "category": "惣菜2",
+    "url": "https://www.sej.co.jp/products/a/dailydish/2/l100/"
+  },
+  {
+    "category": "惣菜3",
+    "url": "https://www.sej.co.jp/products/a/dailydish/3/l100/"
+  },
+  {
+    "category": "サラダ1",
+    "url": "https://www.sej.co.jp/products/a/cat/040020010000000/1/l100/"
+  },
+  {
+    "category": "サラダ2",
+    "url": "https://www.sej.co.jp/products/a/cat/040020010000000/2/l100/"
+  },
+  {
+    "category": "パスタサラダ・おかずサラダ",
+    "url": "https://www.sej.co.jp/products/a/cat/040020020000000/1/l100/"
+  },
+  {
+    "category": "７プレミアム（副菜）",
+    "url": "https://www.sej.co.jp/products/a/cat/040020030000000/1/l100/"
+  },
+  {
+    "category": "カット野菜・カットフルーツ",
+    "url": "https://www.sej.co.jp/products/a/cat/080080030000000/"
+  },
+  {
+    "category": "洋菓子",
+    "url": "https://www.sej.co.jp/products/a/cat/060010010000000/1/l100/"
+  },
+  {
+    "category": "和菓子",
+    "url": "https://www.sej.co.jp/products/a/cat/060010020000000/"
+  },
+  {
+    "category": "アイスクリーム1",
+    "url": "https://www.sej.co.jp/products/a/cat/060020010000000/1/l100/"
+  },
+  {
+    "category": "アイスクリーム2",
+    "url": "https://www.sej.co.jp/products/a/cat/060020010000000/2/l100/"
+  },
+  {
+    "category": "アイスファミリータイプ",
+    "url": "https://www.sej.co.jp/products/a/cat/060020020000000/1/l100/"
+  },
+  {
+    "category": "その他の商品",
+    "url": "https://www.sej.co.jp/products/a/cat/090030020000000/1/l100/"
+  },
+  {
+    "category": "揚げ物惣菜",
+    "url": "https://www.sej.co.jp/products/a/cat/090030010000000/1/l100/"
+  },
+  {
+    "category": "おでん",
+    "url": "https://www.sej.co.jp/products/a/oden/1/l100/"
+  },
+  {
+    "category": "中華まん",
+    "url": "https://www.sej.co.jp/products/a/chukaman/1/l100/"
+  }
+]

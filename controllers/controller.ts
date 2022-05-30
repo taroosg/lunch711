@@ -5,6 +5,6 @@ export const getHtml = async (context: any) => {
   context.response.body = html;
 };
 
-export const get711Json = (context: any) => {
-  context.response.body = get711Data(1, 2);
+export const get711Json = async (context: any) => {
+  context.response.body = await get711Data(1, 2);
 };
