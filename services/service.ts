@@ -38,12 +38,11 @@ const getPlace = async (latitude: number, longitude: number) => {
 const getRegion = (prefecture: string) =>
   placeData.region.find((x) => x.pref.find((x) => x.ja === prefecture))?.ja;
 
-export const get711Data = async (
-  latitude: number = 35.68381981,
-  longitude: number = 139.77456498,
-) => {
+export const get711Data = async (latitude: number, longitude: number) => {
+  const lat = latitude ?? 35.68381981;
+  const lng = longitude ?? 139.77456498;
   // 都道府県
-  const place = await getPlace(latitude, longitude);
+  const place = await getPlace(lat, lng);
   // 地方
   const region = getRegion(place);
   // 全部

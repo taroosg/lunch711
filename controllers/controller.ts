@@ -7,7 +7,7 @@ export const getHtml = async (context: any) => {
 
 export const get711Json = async (context: any) => {
   context.response.body = await get711Data(
-    context.request.url.searchParams.get("latitude"),
-    context.request.url.searchParams.get("longitude"),
+    context?.request?.url?.searchParams?.get("latitude"),
+    context?.request?.url?.searchParams?.get("longitude"),
   );
 };
