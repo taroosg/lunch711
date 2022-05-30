@@ -2,7 +2,7 @@
 
 ## deploy
 
-[https://github.com/taroosg/lunch711](https://github.com/taroosg/lunch711)
+[https://github.com/taroosg/lunch711/](https://github.com/taroosg/lunch711/)
 
 ## How to use
 
