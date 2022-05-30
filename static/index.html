@@ -5,16 +5,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Lunch711</title>
 </head>
 
 <body>
-  <p>hello html</p>
 
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <button id="submit">Lunch</button>
+  <div id="result"></div>
+
   <script>
 
-    (async () => {
+    const lunch = {};
+
+    const getLunchMenu = async () => {
 
       const getPosition = () => new Promise((resolve, reject) =>
         navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -24,14 +27,29 @@
         const position = await getPosition();
         console.log(position);
         const getData = async (position) => {
-          return await axios.get(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
+          const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
+          return await response.json();
         }
-        console.log(await getData(position));
+        return await getData(position)
       } catch (err) {
         console.error(err.message);
       }
+    };
 
-    })()
+    const createHtmlElement = (lunchMenu) => `
+      <p> name: ${lunchMenu.name}</p>
+      <p>price:${lunchMenu.price}</p>
+      <img src="${lunchMenu.img}" alt="">
+    `;
+
+    document.getElementById('submit').addEventListener('click', async () => {
+      lunch['html'] = '<p>loading...</p>';
+      document.getElementById('result').innerHTML = lunch['html'];
+      const menu = await getLunchMenu();
+      lunch['html'] = createHtmlElement(menu);
+      console.log(lunch);
+      document.getElementById('result').innerHTML = lunch['html'];
+    });
 
   </script>
 </body>
