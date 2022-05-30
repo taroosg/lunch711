@@ -13,10 +13,11 @@
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
+    console.log(location.href);
 
     (async () => {
       const getData = async () => {
-        return await axios.get('http://localhost:8000/json');
+        return await axios.get(`${location.href}json`);
       }
       console.log(await getData());
     })()
