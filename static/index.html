@@ -6,13 +6,109 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lunch711</title>
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
+  <style>
+    * {
+      font-family: "Noto Sans JP";
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 4.5vmin;
+      /* color: #2e2930; */
+      color: #595857;
+      font-feature-settings: "palt";
+      letter-spacing: 0.08vmin;
+    }
+
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      height: 10vh;
+      height: 10dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main {
+      height: 80vh;
+      height: 80dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    main div {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    main img {
+      width: 80vw;
+      width: 80dvw;
+      max-width: 400px;
+      display: block;
+    }
+
+    main p {
+      width: 75vw;
+      width: 75dvw;
+      text-align: center;
+      display: block;
+    }
+
+    main a {
+      text-decoration: none;
+      font-size: 3vmin;
+    }
+
+    footer {
+      height: 10vh;
+      height: 10dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    footer button {
+      width: 90vw;
+      width: 90dvw;
+      max-width: 400px;
+      height: 8vh;
+      height: 8dvh;
+      border: none;
+      /* background: #2e2930; */
+      border: 3px solid #595857;
+      background: white;
+      color: #595857;
+    }
+  </style>
 </head>
 
 <body>
 
-  <button id="submit">Lunch</button>
-  <div id="result"></div>
+  <header>
+    <h1>711で買うものを決めるやつ</h1>
+  </header>
 
+  <main>
+    <div id="result">
+      <p>Click Lunch Button!</p>
+    </div>
+  </main>
+
+  <footer>
+    <button id="submit">Lunch</button>
+  </footer>
+
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   <script>
 
     const lunch = {};
@@ -36,10 +132,18 @@
     };
 
     const createHtmlElement = (lunchMenu) => `
-      <p> name: ${lunchMenu.name}</p>
-      <p>price:${lunchMenu.price}</p>
       <img src="${lunchMenu.img}" alt="">
+      <p>${lunchMenu.name}</p>
+      <p>¥ ${lunchMenu.price}</p>
+      ${createTwitterShareButton(`今日のメニューは ${lunchMenu.name}！`)}
     `;
+
+    const createTwitterShareButton = (text) => {
+      let shareUrl = 'https://twitter.com/intent/tweet';
+      shareUrl += '?text=' + encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n`);
+      shareUrl += '&url=' + encodeURIComponent(location.href);
+      return '<a href="' + shareUrl + '">🕊 Tweet</a>';
+    }
 
     document.getElementById('submit').addEventListener('click', async () => {
       lunch['html'] = '<p>loading...</p>';

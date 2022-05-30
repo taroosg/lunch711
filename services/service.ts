@@ -4,7 +4,7 @@ import "https://deno.land/x/dotenv/load.ts";
 const getAllProductData = async (url: string) => {
   const response = await fetch(url);
   const result = (await response.text())
-    .replaceAll(/\n|\t/g, "")
+    .replaceAll(/\n|\r|\t/g, "")
     .match(/<div class="flex_wrap">[\s\S]+<!-- flex_wrap -->/g) ?? [];
   return result[0]
     .split("<!-- list_inner -->")
@@ -15,8 +15,14 @@ const getAllProductData = async (url: string) => {
           .match(/<p><a href=[\s\S]+<\/a><\/p>/)![0]
           .match(
             /[^ -~｡-ﾟ]+/g,
-          )![0],
-        price: Number(x
+          )![0]
+          .replaceAll(/　/g, " ")
+          .replace(
+            /[！-～]/g,
+            (s) => String.fromCharCode(s.charCodeAt(0) - 0xFEE0),
+          )
+          .replace(/(?<=\S) {2,}/g, " "),
+        price: ~~Number(x
           .match(/(?<=item_price"><p>)[\s\S]+）<\/p><\/div>/g)![0]
           .match(/(?<=（税込)[\s\S]+(?=円）)/)),
         place: x
