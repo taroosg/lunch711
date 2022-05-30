@@ -116,10 +116,6 @@
     "url": "https://www.sej.co.jp/products/a/cat/040020020000000/1/l100/"
   },
   {
-    "category": "７プレミアム（副菜）",
-    "url": "https://www.sej.co.jp/products/a/cat/040020030000000/1/l100/"
-  },
-  {
     "category": "カット野菜・カットフルーツ",
     "url": "https://www.sej.co.jp/products/a/cat/080080030000000/"
   },
@@ -158,5 +154,25 @@
   {
     "category": "中華まん",
     "url": "https://www.sej.co.jp/products/a/chukaman/1/l100/"
+  },
+  {
+    "category": "インスタント食品",
+    "url": "https://www.sej.co.jp/products/a/7premium/cat/140020000000000/1/l100/"
+  },
+  {
+    "category": "７プレミアム（主菜）",
+    "url": "https://www.sej.co.jp/products/a/7premium/cat/040010020000000/1/l100/"
+  },
+  {
+    "category": "７プレミアム（副菜）",
+    "url": "https://www.sej.co.jp/products/a/7premium/cat/040010030000000/"
+  },
+  {
+    "category": "７プレミアム（サラダ）",
+    "url": "https://www.sej.co.jp/products/a/7premium/salad/1/l100/"
+  },
+  {
+    "category": "７プレミアム（その他）",
+    "url": "https://www.sej.co.jp/products/a/7premium/cat/040010040000000/1/l100/"
   }
 ]
