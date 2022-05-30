@@ -140,7 +140,7 @@
 
     const createTwitterShareButton = (text) => {
       let shareUrl = 'https://twitter.com/intent/tweet';
-      shareUrl += '?text=' + encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n`);
+      shareUrl += '?text=' + encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n\n`);
       shareUrl += '&url=' + encodeURIComponent(location.href);
       return '<a href="' + shareUrl + '">🕊 Tweet</a>';
     }
