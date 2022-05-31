@@ -45,7 +45,7 @@ const getPlace = async (latitude: number, longitude: number) => {
 const getRegion = (prefecture: string) =>
   placeData.region.find((x) => x.pref.find((x) => x.ja === prefecture))?.ja;
 
-export const get711Data = async (latitude: number, longitude: number) => {
+export const getRegionalData = async (latitude: number, longitude: number) => {
   const lat = latitude ?? 35.68381981;
   const lng = longitude ?? 139.77456498;
   // 都道府県
@@ -64,4 +64,12 @@ export const get711Data = async (latitude: number, longitude: number) => {
   const canGetProducts = [...new Set([...placeProducts, ...regionProducts])];
   const rand = ~~(Math.random() * canGetProducts.length);
   return canGetProducts[rand];
+};
+
+export const getAllData = async () => {
+  // 全部
+  const allProducts =
+    (await Promise.all(productUrl.map((x) => getAllProductData(x.url)))).flat();
+  const rand = ~~(Math.random() * allProducts.length);
+  return allProducts[rand];
 };
