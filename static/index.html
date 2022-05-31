@@ -118,15 +118,22 @@
         navigator.geolocation.getCurrentPosition(resolve, reject)
       );
 
+      const getRegionalData = async (position) => {
+        const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
+        return await response.json();
+      }
+
+      const getGlobalData = async () => {
+        const response = await fetch(`${location.href}json`);
+        return await response.json();
+      }
+
       try {
         const position = await getPosition();
-        const getData = async (position) => {
-          const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
-          return await response.json();
-        }
-        return await getData(position)
+        return await getRegionalData(position)
       } catch (err) {
         console.error(err.message);
+        return await getGlobalData()
       }
     };
 
