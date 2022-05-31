@@ -131,17 +131,19 @@
     };
 
     const createHtmlElement = (lunchMenu) => `
-      <img src="${lunchMenu.img}" alt="">
+      <a href="${lunchMenu.url}" alt="${lunchMenu.name}" target="_blank">
+        <img src="${lunchMenu.img}" alt="">
+      </a>
       <p>${lunchMenu.name}</p>
       <p>¥ ${lunchMenu.price}</p>
-      ${createTwitterShareButton(`今日のメニューは ${lunchMenu.name}！`)}
+      ${createTwitterShareButton(`今日のメニューは ${lunchMenu.name}！`, lunchMenu.url)}
     `;
 
-    const createTwitterShareButton = (text) => {
+    const createTwitterShareButton = (text, url) => {
       let shareUrl = 'https://twitter.com/intent/tweet';
       shareUrl += '?text=' + encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n\n`);
-      shareUrl += '&url=' + encodeURIComponent(location.href);
-      return '<a href="' + shareUrl + '">🕊 Tweet</a>';
+      shareUrl += '&url=' + encodeURIComponent(location.href) + ' ' + url;
+      return '<a href="' + shareUrl + '" target="_blank">🕊 Tweet</a>';
     }
 
     document.getElementById('submit').addEventListener('click', async () => {
