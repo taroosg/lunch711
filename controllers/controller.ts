@@ -1,4 +1,4 @@
-import { getAllData, getRegionalData } from "../services/service.ts";
+import { getGlobalProduct, getRegionalProduct } from "../services/service.ts";
 
 export const getFavicon = async (context: any) => {
   const favicon = (await fetch(
@@ -25,8 +25,8 @@ export const get711Json = async (context: any) => {
     const latitude = context?.request?.url?.searchParams?.get("latitude");
     const longitude = context?.request?.url?.searchParams?.get("longitude");
     context.response.body = !latitude || !longitude
-      ? await getAllData()
-      : await getRegionalData(
+      ? await getGlobalProduct()
+      : await getRegionalProduct(
         context?.request?.url?.searchParams?.get("latitude"),
         context?.request?.url?.searchParams?.get("longitude"),
       );

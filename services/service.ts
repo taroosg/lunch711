@@ -9,15 +9,20 @@ type FantasticJson = {
   img: string;
 };
 
-// 記号数字を全角→半角
+type ProductUrl = {
+  category: string;
+  url: string;
+};
+
 // 全角スペース→半角スペースに
+// 記号数字を全角→半角
 // 連続スペースを一つに
 const getProductName = (productHtmlString: string): string =>
   productHtmlString
     .match(
       /(?<=<p><a href="\/products\/a\/item\/[0-9]{4,}\/">)[\s\S]+(?=<\/a><\/p>)/,
     )![0]
-    .replaceAll(/　/g, " ")
+    .replace(/　/g, " ")
     .replace(
       /[！-～]/g,
       (s) => String.fromCharCode(s.charCodeAt(0) - 0xFEE0),
@@ -47,7 +52,19 @@ const createFantasticJson = (productHtmlString: string): FantasticJson => ({
   img: getProductImageUrl(productHtmlString),
 });
 
-const getAllProducts = async (url: string): Promise<FantasticJson[]> =>
+const filterSeason = (productUrl: ProductUrl[]): ProductUrl[] =>
+  3 < new Date().getMonth() + 1 && new Date().getMonth() + 1 < 9
+    ? productUrl.filter((x) => !["おでん", "中華まん"].includes(x.category))
+    : productUrl;
+
+const getAllProducts = async (
+  productUrl: ProductUrl[],
+): Promise<FantasticJson[]> =>
+  (await Promise.all(
+    filterSeason(productUrl).map((x) => getCategoryProducts(x.url)),
+  )).flat();
+
+const getCategoryProducts = async (url: string): Promise<FantasticJson[]> =>
   (await (await fetch(url)).text())
     .replaceAll(/\n|\r|\t/g, "")!
     .match(/<div class="list_inner(?: .+?)?>.*?<\/div><\/div>/g)!
@@ -80,23 +97,20 @@ const filterRegionalProducts = (
   ]),
 ];
 
-export const getRegionalData = async (
+export const getRegionalProduct = async (
   latitude: number,
   longitude: number,
 ): Promise<FantasticJson> => {
   const place = await getPlace(latitude, longitude);
   const region = getRegion(place);
-  const allProducts =
-    (await Promise.all(productUrl.map((x) => getAllProducts(x.url))))
-      .flat();
+  const allProducts = await getAllProducts(productUrl);
   // 実行地域で購入できるやつ
   const canGetProducts = filterRegionalProducts(allProducts, place, region!);
   return canGetProducts[~~(Math.random() * canGetProducts.length)];
 };
 
-export const getAllData = async (): Promise<FantasticJson> => {
+export const getGlobalProduct = async (): Promise<FantasticJson> => {
   // 全部
-  const allProducts =
-    (await Promise.all(productUrl.map((x) => getAllProducts(x.url)))).flat();
+  const allProducts = await getAllProducts(productUrl);
   return allProducts[~~(Math.random() * allProducts.length)];
 };
