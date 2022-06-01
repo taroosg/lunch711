@@ -38,14 +38,6 @@
       height: 80dvh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    main div {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
       justify-content: space-evenly;
       align-items: center;
     }
@@ -98,10 +90,8 @@
     <h1>711で買うものを決めるやつ</h1>
   </header>
 
-  <main>
-    <div id="result">
-      <p>Click Lunch Button!</p>
-    </div>
+  <main id="result">
+    <p>Click Lunch Button!</p>
   </main>
 
   <footer>
@@ -119,44 +109,52 @@
       );
 
       const getRegionalData = async (position) => {
-        const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
-        return await response.json();
+        try {
+          const response = await fetch(`${location.href}json?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}`);
+          return await response.json();
+        } catch (error) {
+          return error;
+        }
       }
 
       const getGlobalData = async () => {
-        const response = await fetch(`${location.href}json`);
-        return await response.json();
+        try {
+          const response = await fetch(`${location.href}json`);
+          return await response.json();
+        } catch (error) {
+          return error;
+        }
       }
 
       try {
         const position = await getPosition();
         return await getRegionalData(position)
       } catch (err) {
-        console.error(err.message);
         return await getGlobalData()
       }
     };
 
-    const createHtmlElement = (lunchMenu) => `
-      <a href="${lunchMenu.url}" alt="${lunchMenu.name}" target="_blank">
-        <img src="${lunchMenu.img}" alt="">
-      </a>
-      <p>${lunchMenu.name}</p>
-      <p>¥ ${lunchMenu.price}</p>
-      ${createTwitterShareButton(`今日のメニューは ${lunchMenu.name}！`, lunchMenu.url)}
-    `;
+    const createHtmlElement = (lunchMenu) => [
+      `<a href="${lunchMenu.url}" alt="${lunchMenu.name}" target="_blank">`,
+      `<img src="${lunchMenu.img}" alt="">`,
+      `</a>`,
+      `<p>${lunchMenu.name}</p>`,
+      `<p>¥ ${lunchMenu.price}</p>`,
+      `${createTwitterShareButton(`今日のメニューは ${lunchMenu.name}！`, lunchMenu.url)}`,
+    ].join('');
 
-    const createTwitterShareButton = (text, url) => {
-      let shareUrl = 'https://twitter.com/intent/tweet';
-      shareUrl += '?text=' + encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n\n`);
-      shareUrl += '&url=' + encodeURIComponent(location.href) + '%0a%0a ' + url;
-      return '<a href="' + shareUrl + '" target="_blank">🕊 Tweet</a>';
-    }
+    const createTwitterShareButton = (text, url) => [
+      `<a href="https://twitter.com/intent/tweet`,
+      `?text=${encodeURIComponent(`${text}\n\n#lunch711\n#711で買うものを決めるやつ\n\n`)}`,
+      `&url=${encodeURIComponent(location.href)}%0a%0a${url}`,
+      `" target="_blank">🕊 Tweet</a>`,
+    ].join('');
 
     document.getElementById('submit').addEventListener('click', async () => {
       lunch['html'] = '<p>loading...</p>';
       document.getElementById('result').innerHTML = lunch['html'];
-      lunch['html'] = createHtmlElement(await getLunchMenu());
+      const menu = await getLunchMenu();
+      lunch['html'] = menu.message ? `<p>${menu.message}</p>` : createHtmlElement(menu);
       document.getElementById('result').innerHTML = lunch['html'];
     });
 
