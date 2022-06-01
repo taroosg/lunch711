@@ -1,5 +1,12 @@
 import { getAllData, getRegionalData } from "../services/service.ts";
 
+export const getFavicon = async (context: any) => {
+  const favicon = (await fetch(
+    new URL("../static/favicon.png", import.meta.url).toString(),
+  )).body;
+  context.response.body = favicon;
+};
+
 export const getHtml = async (context: any) => {
   try {
     const html = (await fetch(
