@@ -65,7 +65,13 @@ const getAllProducts = async (
   )).flat();
 
 const getCategoryProducts = async (url: string): Promise<FantasticJson[]> =>
-  (await (await fetch(url)).text())
+  (await (await fetch(url, {
+    method: "GET",
+    headers: {
+      "User-Agent":
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36",
+    },
+  })).text())
     .replaceAll(/\n|\r|\t/g, "")!
     .match(/<div class="list_inner(?: .+?)?>.*?<\/div><\/div>/g)!
     .map((productHtmlString) => createFantasticJson(productHtmlString));
