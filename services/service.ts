@@ -34,7 +34,9 @@ const getProductPrice = (productHtmlString: string): number =>
 
 const getProductPlace = (productHtmlString: string): string[] =>
   productHtmlString
-    .match(/(?<=<span>販売地域：<\/span>)[\s\S]+(?=<\/p><\/div>)/)![0].split("、");
+    .match(/(?<=<span>販売地域：<\/span>)[\s\S]+(?=<\/p><\/div>)/)![0].split(
+      "、",
+    );
 
 const getProductUrl = (productHtmlString: string): string =>
   `https://www.sej.co.jp${
@@ -60,9 +62,14 @@ const filterSeason = (productUrl: ProductUrl[]): ProductUrl[] =>
 const getAllProducts = async (
   productUrl: ProductUrl[],
 ): Promise<FantasticJson[]> =>
-  (await Promise.all(
+  (await Promise.allSettled(
     filterSeason(productUrl).map((x) => getCategoryProducts(x.url)),
-  )).flat();
+  ))
+    .filter((result): result is PromiseFulfilledResult<FantasticJson[]> =>
+      result.status === "fulfilled"
+    )
+    .map((result) => result.value)
+    .flat();
 
 const getCategoryProducts = async (url: string): Promise<FantasticJson[]> =>
   (await (await fetch(url, {
