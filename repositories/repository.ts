@@ -1,5 +1,5 @@
-import productJson from "./productUrl.json" assert { type: "json" };
-import placeJson from "./place.json" assert { type: "json" };
+import productJson from "./productUrl.json" with { type: "json" };
+import placeJson from "./place.json" with { type: "json" };
 
 export const productUrl = productJson;
 
